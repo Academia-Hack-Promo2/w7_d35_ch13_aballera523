@@ -2,60 +2,39 @@ require 'httparty'
 
 class Reddit
   include HTTParty
-  attr_accessor :author, :title, :date, :url, :website
-
-  def initialize author, title, date, url, website
-    @author = author
-    @title = title
-    @date = date
-    @url = url
-    @website = website
-  end
+  @@response = HTTParty.get('http://www.reddit.com/.json')
 
   def self.news
-    notices_reddit = []
-    response = HTTParty.get('http://www.reddit.com/.json')
-    response["data"]["children"].each do |notice|
-      title = notice["data"]['title']
-      author = notice["data"]['author']
-      date = Time.at(notice["data"]['created'])
-      url = notice["data"]['url']
-      website = 'Reddit'
-      notice = Reddit.new(author, title, date, url, website)
-      notices_reddit.push(notice)
+    notices_reddit = []    
+    @@response["data"]["children"].each do |notice|
+      notices = {}
+      notices["title"] = notice["data"]['title']
+      notices["author"] = notice["data"]['author']
+      notices["date"] = Time.at(notice["data"]['created'])
+      notices["url"] = notice["data"]['url']
+      notices["website"] = 'Reddit'
+      notices_reddit.push(notices)
     end
     return notices_reddit
   end
 
   def self.authors
     notices_reddit = []
-    response = HTTParty.get('http://www.reddit.com/.json')
-    response["data"]["children"].each do |notice|
-      title = notice["data"]['title']
-      author = notice["data"]['author']
-      date = Time.at(notice["data"]['created'])
-      url = notice["data"]['url']
-      website = 'Reddit'
-      notice = Reddit.new(author, title, date, url, website)
-      notices_reddit.push(notice.author)
+    @@response["data"]["children"].each do |notice|
+      author = {}
+      author["author"] = notice["data"]['author']
+      notices_reddit.push(author)
     end
     return notices_reddit
   end
 
   def self.titles
     notices_reddit = []
-    response = HTTParty.get('http://www.reddit.com/.json')
-    response["data"]["children"].each do |notice|
-      title = notice["data"]['title']
-      author = notice["data"]['author']
-      date = Time.at(notice["data"]['created'])
-      url = notice["data"]['url']
-      website = 'Reddit'
-      notice = Reddit.new(author, title, date, url, website)
-      notices_reddit.push(notice.title)
+    @@response["data"]["children"].each do |notice|
+      title = {}
+      title["title"] = notice["data"]['title']
+      notices_reddit.push(title)
     end
     return notices_reddit
   end
-
-
 end

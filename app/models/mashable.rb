@@ -2,57 +2,38 @@ require 'httparty'
 
 class Mashable
   include HTTParty
-  attr_accessor :author, :title, :date, :url, :website
-
-  def initialize author, title, date, url, website
-    @author = author
-    @title = title
-    @date = date
-    @url = url
-    @website = website
-  end  
-
+  @@response = HTTParty.get('http://mashable.com/stories.json')
+  
   def self.news
     notices_mashable = []
-    response = HTTParty.get('http://mashable.com/stories.json')
-    response["new"].each do |notice|
-      title = notice['title']
-      author = notice['author']
-      date = notice['post_date']
-      url = notice['link']
-      website = 'Mashable'
-      notice = Mashable.new(author, title, date, url, website)
-      notices_mashable.push(notice)
+    @@response["new"].each do |notice|
+      notices = {}
+      notices["title"] = notice['title']
+      notices["author"] = notice['author']
+      notices["date"] = notice['post_date']
+      notices["url"] = notice['link']
+      notices["website"] = 'Mashable'
+      notices_mashable.push(notices)
     end
     return notices_mashable
   end
 
   def self.titles
     notices_mashable = []
-    response = HTTParty.get('http://mashable.com/stories.json')
-    response["new"].each do |notice|
-      title = notice['title']
-      author = notice['author']
-      date = notice['post_date']
-      url = notice['link']
-      website = 'Mashable'
-      notice = Mashable.new(author, title, date, url, website)
-      notices_mashable.push(notice.title)
+    @@response["new"].each do |notice|
+      title = {}
+      title["title"] = notice['title']      
+      notices_mashable.push(title)
     end
     return notices_mashable
   end
 
   def self.authors
     notices_mashable = []
-    response = HTTParty.get('http://mashable.com/stories.json')
-    response["new"].each do |notice|
-      title = notice['title']
-      author = notice['author']
-      date = notice['post_date']
-      url = notice['link']
-      website = 'Mashable'
-      notice = Mashable.new(author, title, date, url, website)
-      notices_mashable.push(notice.author)
+    @@response["new"].each do |notice|
+      author = {}
+      author["author"] = notice['author']
+      notices_mashable.push(author)
     end
     return notices_mashable
   end

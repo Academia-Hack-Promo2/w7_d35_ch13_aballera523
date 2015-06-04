@@ -2,123 +2,85 @@ require 'httparty'
 
 class Feed
   include HTTParty
-  attr_accessor :author, :title, :date, :url, :website
-
-  def initialize author, title, date, url, website
-    @author = author
-    @title = title
-    @date = date
-    @url = url
-    @website = website
-  end  
+  @@mashable = HTTParty.get('http://mashable.com/stories.json')
+  @@reddit = HTTParty.get('http://www.reddit.com/.json')
+  @@digg = HTTParty.get('http://digg.com/api/news/popular.json')
 
   def self.news
-    all_notice = []
-    response = HTTParty.get('http://mashable.com/stories.json')
-    response["new"].each do |notice|
-      author = notice['author']
-      title = notice['title']
-      date = notice['post_date']
-      url = notice['link']
-      website = 'Mashable'
-      notice = Feed.new(author, title, date, url, website)
-      all_notice.push(notice)
-    end
+    all_notice = []    
+    @@mashable["new"].each do |notice|
+      notices = {}
+      notices["author"] = notice['author']
+      notices["title"] = notice['title']
+      notices["date"] = notice['post_date']
+      notices["url"] = notice['link']
+      notices["website"] = 'Mashable'
+      all_notice.push(notices)
+    end    
     
-    response = HTTParty.get('http://www.reddit.com/.json')
-    response["data"]["children"].each do |notice|
-      author = notice["data"]['author']
-      title = notice["data"]['title']
-      date = Time.at(notice["data"]['created'])
-      url = notice["data"]['url']
-      website = 'Reddit'
-      notice = Feed.new(author, title, date, url, website)
-      all_notice.push(notice)
-    end
+    @@reddit["data"]["children"].each do |notice|
+      notices = {}
+      notices["author"] = notice["data"]['author']
+      notices["title"] = notice["data"]['title']
+      notices["date"] = Time.at(notice["data"]['created'])
+      notices["url"] = notice["data"]['url']
+      notices["website"] = 'Reddit'
+      all_notice.push(notices)
+    end    
     
-    response = HTTParty.get('http://digg.com/api/news/popular.json')
-    response["data"]["feed"].each do |notice|
-      author = notice["content"]['author']
-      title = notice["content"]['title']
-      date = Time.at(notice['date'])
-      url = notice["content"]['url']
-      website = 'Digg'
-      notice = Feed.new(author, title, date, url, website)
-      all_notice.push(notice)
+    @@digg["data"]["feed"].each do |notice|
+      notices = {}
+      notices["author"] = notice["content"]['author']
+      notices["title"] = notice["content"]['title']
+      notices["date"] = Time.at(notice['date'])
+      notices["url"] = notice["content"]['url']
+      notices["website"] = 'Digg'
+      all_notice.push(notices)
     end
     return all_notice
   end  
 
   def self.authors
     all_notice = []
-    response = HTTParty.get('http://mashable.com/stories.json')
-    response["new"].each do |notice|
-      author = notice['author']
-      title = notice['title']
-      date = notice['post_date']
-      url = notice['link']
-      website = 'Mashable'
-      notice = Feed.new(author, title, date, url, website)
-      all_notice.push(notice.author)
-    end
+    @@mashable["new"].each do |notice|
+      author = {}
+      author["author"] = notice['author']
+      all_notice.push(author)
+    end    
     
-    response = HTTParty.get('http://www.reddit.com/.json')
-    response["data"]["children"].each do |notice|
-      author = notice["data"]['author']
-      title = notice["data"]['title']
-      date = Time.at(notice["data"]['created'])
-      url = notice["data"]['url']
-      website = 'Reddit'
-      notice = Feed.new(author, title, date, url, website)
-      all_notice.push(notice.author)
-    end
-    
-    response = HTTParty.get('http://digg.com/api/news/popular.json')
-    response["data"]["feed"].each do |notice|
-      author = notice["content"]['author']
-      title = notice["content"]['title']
-      date = Time.at(notice['date'])
-      url = notice["content"]['url']
-      website = 'Digg'
-      notice = Feed.new(author, title, date, url, website)
-      all_notice.push(notice.author)
+    @@reddit["data"]["children"].each do |notice|
+      author = {}
+      author["author"] = notice["data"]['author']
+      all_notice.push(author)
+    end    
+   
+    @@digg["data"]["feed"].each do |notice|
+      author = {}
+      author["author"] = notice["content"]['author']
+      all_notice.push(author)
     end
     return all_notice
   end   
 
   def self.titles
     all_notice = []
-    response = HTTParty.get('http://mashable.com/stories.json')
-    response["new"].each do |notice|
-      author = notice['author']
-      title = notice['title']
-      date = notice['post_date']
-      url = notice['link']
-      website = 'Mashable'
-      notice = Feed.new(author, title, date, url, website)
-      all_notice.push(notice.title)
-    end
     
-    response = HTTParty.get('http://www.reddit.com/.json')
-    response["data"]["children"].each do |notice|
-      author = notice["data"]['author']
-      title = notice["data"]['title']
-      date = Time.at(notice["data"]['created'])
-      url = notice["data"]['url']
-      website = 'Reddit'
-      notice = Feed.new(author, title, date, url, website)
-      all_notice.push(notice.title)
-    end
+    @@mashable["new"].each do |notice|
+      title = {}
+      title["title"] = notice['title']
+      all_notice.push(title)
+    end    
     
-    response = HTTParty.get('http://digg.com/api/news/popular.json')
-    response["data"]["feed"].each do |notice|
-      author = notice["content"]['author']
-      title = notice["content"]['title']
-      date = Time.at(notice['date'])
-      url = notice["content"]['url']
-      website = 'Digg'
-      notice = Feed.new(author, title, date, url, website)
-      all_notice.push(notice.title)
+    @@reddit["data"]["children"].each do |notice|
+      title = {}
+      title["title"] = notice["data"]['title']
+      all_notice.push(title)
+    end
+        
+    @@digg["data"]["feed"].each do |notice|
+      title = {}
+      title["title"] = notice["content"]['title']
+      all_notice.push(title)
     end
     return all_notice
   end 
