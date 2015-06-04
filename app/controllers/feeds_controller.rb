@@ -2,7 +2,7 @@ class FeedsController < ApplicationController
 
 
 	def mashable
-		render json: Mashable.news
+		render json: Mashable.notices
 	end
 
 	def mashable_titles
@@ -14,7 +14,7 @@ class FeedsController < ApplicationController
 	end
 
 	def digg
-		render json: Digg.news
+		render json: Digg.notices
 	end
 
 	def digg_titles
@@ -26,7 +26,7 @@ class FeedsController < ApplicationController
 	end
 
 	def reddit
-		render json: Reddit.news
+		render json: Reddit.notices
 	end
 
 	def reddit_titles
@@ -38,7 +38,7 @@ class FeedsController < ApplicationController
 	end
 
 	def feed
-		render json: Feed.news
+		render json: Feed.notices
 	end	
 
 	def feed_authors

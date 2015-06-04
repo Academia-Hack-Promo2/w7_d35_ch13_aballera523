@@ -2,39 +2,35 @@ require 'httparty'
 
 class Digg
   include HTTParty
-  @@response = HTTParty.get('http://digg.com/api/news/popular.json')
+  @@notices = []  
+  @@authors = []
+  @@titles = []
+  digg = HTTParty.get('http://digg.com/api/news/popular.json')
+  digg["data"]["feed"].each do |notice|
+    notices = {}
+    authors = {}
+    titles = {}
+    notices["title"] = notice["content"]['title']
+    notices["author"] = notice["content"]['author']
+    notices["date"] = Time.at(notice['date'])
+    notices["url"] = notice["content"]['url']
+    notices["website"] = 'Digg'
+    titles["title"] = notice["content"]['title']
+    authors["author"] = notice["content"]['author']
+    @@notices.push(notices)
+    @@authors.push(authors)
+    @@titles.push(titles)
+  end
 
-  def self.news
-    notices_digg = []    
-    @@response["data"]["feed"].each do |notice|
-      notices = {}
-      notices["title"] = notice["content"]['title']
-      notices["author"] = notice["content"]['author']
-      notices["date"] = Time.at(notice['date'])
-      notices["url"] = notice["content"]['url']
-      notices["website"] = 'Digg'
-      notices_digg.push(notices)
-    end
-    return notices_digg
+  def self.notices
+    @@notices
   end
 
   def self.titles
-    notices_digg = []
-    @@response["data"]["feed"].each do |notice|
-      title = {}
-      title["title"] = notice["content"]['title']
-      notices_digg.push(title)
-    end
-    return notices_digg
+    @@titles
   end
 
   def self.authors
-    notices_digg = []
-    @@response["data"]["feed"].each do |notice|
-      author = {}
-      author["author"] = notice["content"]['author']
-      notices_digg.push(author)
-    end
-    return notices_digg
+    @@authors
   end
 end
