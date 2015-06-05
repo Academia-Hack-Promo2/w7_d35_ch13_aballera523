@@ -2,9 +2,9 @@ require 'httparty'
 
 class Reddit
   include HTTParty
-  @@notices = []  
-  @@authors = []
-  @@titles = []
+  @notices = []  
+  @authors = []
+  @titles = []
   reddit = HTTParty.get('http://www.reddit.com/.json')
   reddit["data"]["children"].each do |notice|
     notices = {}
@@ -17,20 +17,20 @@ class Reddit
     notices["website"] = 'Reddit'
     authors["author"] = notice["data"]['author']
     titles["title"] = notice["data"]['title']
-    @@notices.push(notices)
-    @@authors.push(authors)
-    @@titles.push(titles)
+    @notices.push(notices)
+    @authors.push(authors)
+    @titles.push(titles)
   end
 
   def self.notices
-    @@notices
+    @notices
   end
 
   def self.authors
-    @@authors
+    @authors
   end  
 
   def self.titles
-    @@titles
+    @titles
   end
 end

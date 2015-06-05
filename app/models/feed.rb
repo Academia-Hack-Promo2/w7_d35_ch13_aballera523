@@ -2,14 +2,14 @@ require 'httparty'
 
 class Feed
   include HTTParty
-  @@mashable = HTTParty.get('http://mashable.com/stories.json')
-  @@reddit = HTTParty.get('http://www.reddit.com/.json')
-  @@digg = HTTParty.get('http://digg.com/api/news/popular.json')
-  @@notices = []  
-  @@authors = []
-  @@titles = []  
+  @mashable = HTTParty.get('http://mashable.com/stories.json')
+  @reddit = HTTParty.get('http://www.reddit.com/.json')
+  @digg = HTTParty.get('http://digg.com/api/news/popular.json')
+  @notices = []  
+  @authors = []
+  @titles = []  
     
-  @@mashable["new"].each do |notice|
+  @mashable["new"].each do |notice|
     notices = {}
     authors = {}
     titles = {}
@@ -20,12 +20,12 @@ class Feed
     notices["website"] = 'Mashable'
     authors["author"] = notice['author']
     titles["title"] = notice['title']
-    @@notices.push(notices)
-    @@authors.push(authors)
-    @@titles.push(titles)
+    @notices.push(notices)
+    @authors.push(authors)
+    @titles.push(titles)
   end    
     
-  @@reddit["data"]["children"].each do |notice|
+  @reddit["data"]["children"].each do |notice|
     notices = {}
     authors = {}
     titles = {}
@@ -36,12 +36,12 @@ class Feed
     notices["website"] = 'Reddit'
     authors["author"] = notice["data"]['author']
     titles["title"] = notice["data"]['title']
-    @@notices.push(notices)
-    @@authors.push(authors)
-    @@titles.push(titles)
+    @notices.push(notices)
+    @authors.push(authors)
+    @titles.push(titles)
   end    
     
-  @@digg["data"]["feed"].each do |notice|
+  @digg["data"]["feed"].each do |notice|
     notices = {}
     authors = {}
     titles = {}
@@ -52,20 +52,20 @@ class Feed
     notices["website"] = 'Digg'
     authors["author"] = notice["content"]['author']
     titles["title"] = notice["content"]['title']
-    @@notices.push(notices)
-    @@authors.push(authors)
-    @@titles.push(titles)
+    @notices.push(notices)
+    @authors.push(authors)
+    @titles.push(titles)
   end
 
   def self.notices
-    @@notices
+    @notices
   end  
 
   def self.authors
-    @@authors
+    @authors
   end   
 
   def self.titles
-    @@titles
+    @titles
   end 
 end

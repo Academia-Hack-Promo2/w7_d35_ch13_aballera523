@@ -2,9 +2,9 @@ require 'httparty'
 
 class Digg
   include HTTParty
-  @@notices = []  
-  @@authors = []
-  @@titles = []
+  @notices = []  
+  @authors = []
+  @titles = []
   digg = HTTParty.get('http://digg.com/api/news/popular.json')
   digg["data"]["feed"].each do |notice|
     notices = {}
@@ -17,20 +17,20 @@ class Digg
     notices["website"] = 'Digg'
     titles["title"] = notice["content"]['title']
     authors["author"] = notice["content"]['author']
-    @@notices.push(notices)
-    @@authors.push(authors)
-    @@titles.push(titles)
+    @notices.push(notices)
+    @authors.push(authors)
+    @titles.push(titles)
   end
 
   def self.notices
-    @@notices
+    @notices
   end
 
   def self.titles
-    @@titles
+    @titles
   end
 
   def self.authors
-    @@authors
+    @authors
   end
 end

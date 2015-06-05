@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
-  get 'digg' => 'feeds#digg'
+  get 'digg/notices' => 'feeds#digg_notices'
   get 'digg/titles' => 'feeds#digg_titles'
   get 'digg/authors' => 'feeds#digg_authors'
 
-  get 'reddit' => 'feeds#reddit'
+  get 'reddit/notices' => 'feeds#reddit_notices'
   get 'reddit/titles' => 'feeds#reddit_titles'
   get 'reddit/authors' => 'feeds#reddit_authors'
 
-  get 'mashable' => 'feeds#mashable'
+  get 'mashable/notices' => 'feeds#mashable_notices'
   get 'mashable/titles' => 'feeds#mashable_titles'
   get 'mashable/authors' => 'feeds#mashable_authors'
   
-  get 'feeds' => 'feeds#feed'
-  get 'titles' => 'feeds#feed_titles'
-  get 'authors' => 'feeds#feed_authors'
+  get 'feeds/notices' => 'feeds#feed_notices'
+  get 'feeds/titles' => 'feeds#feed_titles'
+  get 'feeds/authors' => 'feeds#feed_authors'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

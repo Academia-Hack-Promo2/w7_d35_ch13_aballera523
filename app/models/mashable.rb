@@ -2,9 +2,9 @@ require 'httparty'
 
 class Mashable
   include HTTParty
-  @@notices = []  
-  @@authors = []
-  @@titles = []
+  @notices = []  
+  @authors = []
+  @titles = []
   mashable = HTTParty.get('http://mashable.com/stories.json')
   mashable["new"].each do |notice|
     notices = {}
@@ -17,20 +17,20 @@ class Mashable
     notices["website"] = 'Mashable'
     authors["author"] = notice['author']
     titles["title"] = notice['title']
-    @@notices.push(notices)
-    @@authors.push(authors)
-    @@titles.push(titles)
+    @notices.push(notices)
+    @authors.push(authors)
+    @titles.push(titles)
     end
     
   def self.notices
-    @@notices
+    @notices
   end
 
   def self.titles
-    @@titles
+    @titles
   end
 
   def self.authors
-    @@authors
+    @authors
   end
 end

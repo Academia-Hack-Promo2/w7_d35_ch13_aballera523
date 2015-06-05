@@ -1,7 +1,7 @@
 class FeedsController < ApplicationController
 
 
-	def mashable
+	def mashable_notices
 		render json: Mashable.notices
 	end
 
@@ -13,7 +13,7 @@ class FeedsController < ApplicationController
 		render json: Mashable.authors
 	end
 
-	def digg
+	def digg_notices
 		render json: Digg.notices
 	end
 
@@ -25,7 +25,7 @@ class FeedsController < ApplicationController
 		render json: Digg.authors
 	end
 
-	def reddit
+	def reddit_notices
 		render json: Reddit.notices
 	end
 
@@ -37,7 +37,7 @@ class FeedsController < ApplicationController
 		render json: Reddit.authors
 	end
 
-	def feed
+	def feed_notices
 		render json: Feed.notices
 	end	
 
