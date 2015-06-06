@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'mashable/notices' => 'feeds#mashable_notices'
   get 'mashable/titles' => 'feeds#mashable_titles'
   get 'mashable/authors' => 'feeds#mashable_authors'
+  get 'mashable/authors/:author' => 'feeds#mashable_authors_show'
   
   get 'feeds/notices' => 'feeds#feed_notices'
   get 'feeds/titles' => 'feeds#feed_titles'

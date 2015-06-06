@@ -15,8 +15,12 @@ class Digg
     notices["date"] = Time.at(notice['date'])
     notices["url"] = notice["content"]['url']
     notices["website"] = 'Digg'
-    titles["title"] = notice["content"]['title']
     authors["author"] = notice["content"]['author']
+    authors["title"] = notice["content"]['title']
+    authors["url"] = notice["content"]['url']
+    titles["title"] = notice["content"]['title']
+    titles["author"] = notice["content"]['author']
+    titles["url"] = notice["content"]['url']
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)

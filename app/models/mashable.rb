@@ -16,7 +16,11 @@ class Mashable
     notices["url"] = notice['link']
     notices["website"] = 'Mashable'
     authors["author"] = notice['author']
+    authors["title"] = notice['title']
+    authors["url"] = notice['link']
     titles["title"] = notice['title']
+    titles["author"] = notice['author']
+    titles["url"] = notice['link']
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)

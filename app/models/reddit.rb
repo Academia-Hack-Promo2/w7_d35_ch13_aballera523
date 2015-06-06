@@ -16,7 +16,11 @@ class Reddit
     notices["url"] = notice["data"]['url']
     notices["website"] = 'Reddit'
     authors["author"] = notice["data"]['author']
+    authors["title"] = notice["data"]['title']
+    authors["url"] = notice["data"]['url']
     titles["title"] = notice["data"]['title']
+    titles["author"] = notice["data"]['author']
+    titles["url"] = notice["data"]['url']
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)

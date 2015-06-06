@@ -19,7 +19,11 @@ class Feed
     notices["url"] = notice['link']
     notices["website"] = 'Mashable'
     authors["author"] = notice['author']
-    titles["title"] = notice['title']
+    authors["title"] = notice['title']    
+    authors["url"] = notice['link']
+    titles["title"] = notice['title']    
+    titles["author"] = notice['author']
+    titles["url"] = notice['link']
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)
@@ -35,7 +39,11 @@ class Feed
     notices["url"] = notice["data"]['url']
     notices["website"] = 'Reddit'
     authors["author"] = notice["data"]['author']
+    authors["title"] = notice["data"]['title']    
+    authors["url"] = notice["data"]['url']
     titles["title"] = notice["data"]['title']
+    titles["author"] = notice["data"]['author']        
+    titles["url"] = notice["data"]['url']
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)
@@ -50,8 +58,12 @@ class Feed
     notices["date"] = Time.at(notice['date'])
     notices["url"] = notice["content"]['url']
     notices["website"] = 'Digg'
-    authors["author"] = notice["content"]['author']
+    authors["author"] = notice["content"]['author']    
+    authors["title"] = notice["content"]['title']    
+    authors["url"] = notice["content"]['url']
     titles["title"] = notice["content"]['title']
+    titles["author"] = notice["content"]['author'] 
+    titles["url"] = notice["content"]['url']
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)
