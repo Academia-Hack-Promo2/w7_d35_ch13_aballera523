@@ -14,7 +14,6 @@ class Digg
     notices["author"] = notice["content"]['author']
     notices["date"] = Time.at(notice['date'])
     notices["url"] = notice["content"]['url']
-    notices["website"] = 'Digg'
     authors["author"] = notice["content"]['author']
     authors["title"] = notice["content"]['title']
     authors["url"] = notice["content"]['url']

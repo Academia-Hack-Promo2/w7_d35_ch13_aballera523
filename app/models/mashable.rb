@@ -14,7 +14,6 @@ class Mashable
     notices["author"] = notice['author']
     notices["date"] = notice['post_date']
     notices["url"] = notice['link']
-    notices["website"] = 'Mashable'
     authors["author"] = notice['author']
     authors["title"] = notice['title']
     authors["url"] = notice['link']

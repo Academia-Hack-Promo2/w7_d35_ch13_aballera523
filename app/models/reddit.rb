@@ -14,7 +14,6 @@ class Reddit
     notices["author"] = notice["data"]['author']
     notices["date"] = Time.at(notice["data"]['created'])
     notices["url"] = notice["data"]['url']
-    notices["website"] = 'Reddit'
     authors["author"] = notice["data"]['author']
     authors["title"] = notice["data"]['title']
     authors["url"] = notice["data"]['url']
