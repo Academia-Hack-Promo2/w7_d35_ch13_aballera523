@@ -18,9 +18,11 @@ class Digg
     authors["author"] = notice["content"]['author']
     authors["title"] = notice["content"]['title']
     authors["url"] = notice["content"]['url']
+    authors["date"] = Time.at(notice['date'])
     titles["title"] = notice["content"]['title']
     titles["author"] = notice["content"]['author']
     titles["url"] = notice["content"]['url']
+    titles["date"] = Time.at(notice['date'])
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)

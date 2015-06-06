@@ -18,9 +18,11 @@ class Reddit
     authors["author"] = notice["data"]['author']
     authors["title"] = notice["data"]['title']
     authors["url"] = notice["data"]['url']
+    authors["date"] = Time.at(notice["data"]['created'])
     titles["title"] = notice["data"]['title']
     titles["author"] = notice["data"]['author']
     titles["url"] = notice["data"]['url']
+    titles["date"] = Time.at(notice["data"]['created'])
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)

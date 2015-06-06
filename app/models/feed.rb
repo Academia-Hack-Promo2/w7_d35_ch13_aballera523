@@ -21,9 +21,11 @@ class Feed
     authors["author"] = notice['author']
     authors["title"] = notice['title']    
     authors["url"] = notice['link']
+    authors["date"] = notice['post_date']
     titles["title"] = notice['title']    
     titles["author"] = notice['author']
     titles["url"] = notice['link']
+    titles["date"] = notice['post_date']
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)
@@ -41,9 +43,11 @@ class Feed
     authors["author"] = notice["data"]['author']
     authors["title"] = notice["data"]['title']    
     authors["url"] = notice["data"]['url']
+    authors["date"] = Time.at(notice["data"]['created'])
     titles["title"] = notice["data"]['title']
     titles["author"] = notice["data"]['author']        
     titles["url"] = notice["data"]['url']
+    titles["date"] = Time.at(notice["data"]['created'])
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)
@@ -61,9 +65,11 @@ class Feed
     authors["author"] = notice["content"]['author']    
     authors["title"] = notice["content"]['title']    
     authors["url"] = notice["content"]['url']
+    authors["date"] = Time.at(notice['date'])
     titles["title"] = notice["content"]['title']
     titles["author"] = notice["content"]['author'] 
     titles["url"] = notice["content"]['url']
+    titles["date"] = Time.at(notice['date'])
     @notices.push(notices)
     @authors.push(authors)
     @titles.push(titles)
